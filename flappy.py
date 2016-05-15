@@ -301,6 +301,7 @@ def mainGame(movementInfo):
 
 def showGameOverScreen(crashInfo):
     """crashes the player down ans shows gameover image"""
+
     score = crashInfo['score']
     playerx = SCREENWIDTH * 0.2
     playery = crashInfo['y']
@@ -344,7 +345,7 @@ def showGameOverScreen(crashInfo):
         SCREEN.blit(IMAGES['base'], (basex, BASEY))
         showScore(score)
         SCREEN.blit(IMAGES['player'][1], (playerx,playery))
-
+        SCREEN.blit(IMAGES['gameover'], (SCREENWIDTH /6, SCREENHEIGHT / 3))
         FPSCLOCK.tick(FPS)
         pygame.display.update()
 

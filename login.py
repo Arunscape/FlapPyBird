@@ -2,6 +2,7 @@
 from tkinter import *
 from tkinter import messagebox
 import csv
+import flappy, hiscores
 
 class loginApp:
     def __init__(self, master):
@@ -44,6 +45,7 @@ class loginApp:
         if not self.are_fields_empty():
             if self.validate_credentials():
                 print('success! logging in...')
+                flappy.main()
             elif not self.validate_credentials():
                 self.username_exists()
 
@@ -58,6 +60,8 @@ class loginApp:
         elif self.clicked_new_account_before == True:
             if self.verify_new_password():
                 print('meking new account...')
+                self.write_data()
+                flappy.main()
             elif not self.verify_new_password():
                 self.try_again()
 
@@ -119,7 +123,11 @@ class loginApp:
         self.passentry.delete(0,'end')
         self.loginbutton.configure(state='normal')
 
-
+    def write_data(self):
+        with open('scores.csv', 'a', newline='') as csvfile:
+            user = self.userentry.get()
+            pas = self.passentry.get()
+            csv.writer(csvfile).writerow([user,pas,str(0)])
 
 root = Tk()
 a = loginApp(root)

@@ -1,3 +1,4 @@
+#modified to run with python3
 from itertools import cycle
 import random
 import sys
@@ -156,7 +157,7 @@ def showWelcomeAnimation():
             if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
                 pygame.quit()
                 sys.exit()
-            if event.type == KEYDOWN and (event.key == K_SPACE or event.key == K_UP):
+            if (event.type == KEYDOWN and (event.key == K_SPACE or event.key == K_UP)) or (event.type == pygame.MOUSEBUTTONDOWN) :
                 # make first flap sound and return values for mainGame
                 SOUNDS['wing'].play()
                 return {
@@ -167,7 +168,7 @@ def showWelcomeAnimation():
 
         # adjust playery, playerIndex, basex
         if (loopIter + 1) % 5 == 0:
-            playerIndex = playerIndexGen.next()
+            playerIndex = playerIndexGen.__next__()
         loopIter = (loopIter + 1) % 30
         basex = -((-basex + 4) % baseShift)
         playerShm(playerShmVals)
@@ -223,7 +224,7 @@ def mainGame(movementInfo):
             if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
                 pygame.quit()
                 sys.exit()
-            if event.type == KEYDOWN and (event.key == K_SPACE or event.key == K_UP):
+            if (event.type == KEYDOWN and (event.key == K_SPACE or event.key == K_UP)) or (event.type == pygame.MOUSEBUTTONDOWN):
                 if playery > -2 * IMAGES['player'][0].get_height():
                     playerVelY = playerFlapAcc
                     playerFlapped = True
@@ -233,6 +234,7 @@ def mainGame(movementInfo):
         crashTest = checkCrash({'x': playerx, 'y': playery, 'index': playerIndex},
                                upperPipes, lowerPipes)
         if crashTest[0]:
+            
             return {
                 'y': playery,
                 'groundCrash': crashTest[1],
@@ -253,7 +255,7 @@ def mainGame(movementInfo):
 
         # playerIndex basex change
         if (loopIter + 1) % 3 == 0:
-            playerIndex = playerIndexGen.next()
+            playerIndex = playerIndexGen.__next__()
         loopIter = (loopIter + 1) % 30
         basex = -((-basex + 100) % baseShift)
 
@@ -320,7 +322,7 @@ def showGameOverScreen(crashInfo):
             if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
                 pygame.quit()
                 sys.exit()
-            if event.type == KEYDOWN and (event.key == K_SPACE or event.key == K_UP):
+            if (event.type == KEYDOWN and (event.key == K_SPACE or event.key == K_UP)) or (event.type == pygame.MOUSEBUTTONDOWN):
                 if playery + playerHeight >= BASEY - 1:
                     return
 
@@ -432,8 +434,8 @@ def pixelCollision(rect1, rect2, hitmask1, hitmask2):
     x1, y1 = rect.x - rect1.x, rect.y - rect1.y
     x2, y2 = rect.x - rect2.x, rect.y - rect2.y
 
-    for x in xrange(rect.width):
-        for y in xrange(rect.height):
+    for x in range(rect.width):
+        for y in range(rect.height):
             if hitmask1[x1+x][y1+y] and hitmask2[x2+x][y2+y]:
                 return True
     return False

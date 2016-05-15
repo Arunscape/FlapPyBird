@@ -2,7 +2,8 @@ FlappyBirdClone
 ===============
 This is a fork of: https://github.com/sourabhv/FlapPyBird
 I'm just adding a login form and highscore functionality to the app!
-
+I also updated flappy.py to work with python3 (it probably won't work with python2 anymore...)
+--------------------------------------------------------------------
 A Flappy Bird Clone made using [python-pygame][1]
 
 How-to

@@ -28,10 +28,20 @@ class hiscore:
     def sort_score():
       print('sortscore')
 
-    Radiobutton(topframe, text='Name', variable = v, value = 1, command=sort_name).grid(row=0, column=1)
-    Radiobutton(topframe, text='Score', variable = v, value =2, command=sort_score).grid(row=0,column=2)
-
+    Radiobutton(topframe, text='Name', variable = v, value = 1, command=sort_name).grid(row=0, column=1, sticky =W)
+    Radiobutton(topframe, text='Score', variable = v, value =2, command=sort_score).grid(row=0,column=2, sticky=W)
     
+
+
+    scrollbar = Scrollbar(topframe, orient=VERTICAL)
+    list = Listbox(topframe, yscrollcommand=scrollbar.set())
+    list.insert(END,'start')
+    list.insert(END,'end')
+    scrollbar.config(command=list.yview)
+    scrollbar.pack(side=RIGHT, fill=Y)
+    list.grid(row=1,columnspan =3)
+    
+       
     
     
 

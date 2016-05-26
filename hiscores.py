@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from tkinter import *
-
+import csv
+from operator import itemgetter
 
 class hiscore:
   def __init__(self, master):
@@ -20,26 +21,37 @@ class hiscore:
     self.exitbutton.grid(row = 0, column = 1)
 
     v = IntVar()
+    v.set(2)
     self.label = Label(topframe, text='Sort by:')
     self.label.grid(row = 0, column = 0)
+
+    with open('scores.csv') as csvfile:
+      self.data = list(csv.reader(csvfile))
     
     def sort_name():
       print('sortname')
     def sort_score():
       print('sortscore')
+      newlist = self.data
+      sortedbyscore = sorted(newlist,key=lambda x: int(x[2]), reverse = True)
+      print(sortedbyscore)
+      for line in sortedbyscore:
+        self.listbox.insert(END, line)
 
-    Radiobutton(topframe, text='Name', variable = v, value = 1, command=sort_name).grid(row=0, column=1, sticky =W)
-    Radiobutton(topframe, text='Score', variable = v, value =2, command=sort_score).grid(row=0,column=2, sticky=W)
-    
+    rd1 = Radiobutton(topframe, text='Name', variable = v, value = 1, command=sort_name)
+    rd2 = Radiobutton(topframe, text='Score', variable = v, value =2, command=sort_score)
+    rd2.select()
+    rd1.grid(row=0, column=1, sticky =W)
+    rd2.grid(row=0,column=2, sticky=W)
+
 
 
     scrollbar = Scrollbar(topframe, orient=VERTICAL)
-    list = Listbox(topframe, yscrollcommand=scrollbar.set())
-    list.insert(END,'start')
-    list.insert(END,'end')
-    scrollbar.config(command=list.yview)
-    scrollbar.pack(side=RIGHT, fill=Y)
-    list.grid(row=1,columnspan =3)
+    self.listbox = Listbox(topframe)
+    self.listbox.config(yscrollcommand=scrollbar.set)
+    scrollbar.config(command=self.listbox.yview)
+    scrollbar.grid(row=1, column=3)
+    self.listbox.grid(row=1,columnspan =3)
     
        
     
@@ -50,6 +62,8 @@ class hiscore:
     pass
   def exit(self):
     root.destroy()
+
+
 root = Tk()
 a = hiscore(root)
 root.title('Highscores of Flappy Bird')

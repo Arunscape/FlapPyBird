@@ -35,8 +35,13 @@ class hiscore:
       newlist = self.data
       sortedbyscore = sorted(newlist,key=lambda x: int(x[2]), reverse = True)
       print(sortedbyscore)
+      longestname = max(self.data, key=lambda x: len(x[2]))
+      longestnamelength = len(longestname[0])
+
       for line in sortedbyscore:
-        self.listbox.insert(END, line)
+        #distance = longestnamelength - len(line[0]) + 2
+        self.listbox.insert(END, line[0], line[2], '-'*20)
+
 
     rd1 = Radiobutton(topframe, text='Name', variable = v, value = 1, command=sort_name)
     rd2 = Radiobutton(topframe, text='Score', variable = v, value =2, command=sort_score)

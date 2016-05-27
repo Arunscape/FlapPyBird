@@ -16,3 +16,4 @@ git clone https://github.com/Arunscape/FlapPyBird.git
 git config --global user.email "arunscape@gmail.com"
 git config --global user.name "Arunscape
 cd ~/FlapPyBird
+pycharm-community

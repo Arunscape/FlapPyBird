@@ -128,8 +128,9 @@ class loginApp:
             user = self.userentry.get()
             pas = self.passentry.get()
             csv.writer(csvfile).writerow([user,pas,str(0)])
-
-root = Tk()
-a = loginApp(root)
-root.title('Login To Flappy Bird')
-root.mainloop()
+def main():
+  root = Tk()
+  a = loginApp(root)
+  root.title('Login To Flappy Bird')
+  root.mainloop()
+main()

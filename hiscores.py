@@ -68,8 +68,8 @@ class hiscore:
   def exit(self):
     root.destroy()
 
-
-root = Tk()
-a = hiscore(root)
-root.title('Highscores of Flappy Bird')
-root.mainloop()
+def main():
+  root = Tk()
+  a = hiscore(root)
+  root.title('Highscores of Flappy Bird')
+  root.mainloop()

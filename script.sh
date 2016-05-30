@@ -3,7 +3,7 @@ sudo add-apt-repository universe
 sudo add-apt-repository multiverse
 sudo add-apt-repository ppa:mystic-mirage/pycharm
 sudo apt-get update -y && sudo apt-get upgrade -y
-sudo apt install python python3 python-tk python3-tk git pycharm-community mercurial-y
+sudo apt install python python3 python-tk python3-tk git pycharm-community mercurial -y
 hg clone https://bitbucket.org/pygame/pygame
 cd pygame
 sudo apt-get install -y python3-dev python3-numpy libsdl-dev libsdl-image1.2-dev \

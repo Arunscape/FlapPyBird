@@ -5,7 +5,7 @@ import sys
 
 import pygame
 from pygame.locals import *
-
+import hiscores
 
 FPS = 30
 SCREENWIDTH  = 288
@@ -156,7 +156,7 @@ def showWelcomeAnimation():
         for event in pygame.event.get():
             if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
                 pygame.quit()
-                sys.exit()
+                #sys.exit()
             if (event.type == KEYDOWN and (event.key == K_SPACE or event.key == K_UP)) or (event.type == pygame.MOUSEBUTTONDOWN) :
                 # make first flap sound and return values for mainGame
                 SOUNDS['wing'].play()
@@ -223,7 +223,7 @@ def mainGame(movementInfo):
         for event in pygame.event.get():
             if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
                 pygame.quit()
-                sys.exit()
+                #sys.exit()
             if (event.type == KEYDOWN and (event.key == K_SPACE or event.key == K_UP)) or (event.type == pygame.MOUSEBUTTONDOWN):
                 if playery > -2 * IMAGES['player'][0].get_height():
                     playerVelY = playerFlapAcc
@@ -322,11 +322,12 @@ def showGameOverScreen(crashInfo):
         for event in pygame.event.get():
             if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
                 pygame.quit()
-                sys.exit()
+                #sys.exit()
             if (event.type == KEYDOWN and (event.key == K_SPACE or event.key == K_UP)) or (event.type == pygame.MOUSEBUTTONDOWN):
-                if playery + playerHeight >= BASEY - 1:
-                    return
-
+                """if playery + playerHeight >= BASEY - 1:
+                    return"""
+                pygame.quit()
+                hiscores.main()
         # player y shift
         if playery + playerHeight < BASEY - 1:
             playery += min(playerVelY, BASEY - playery - playerHeight)

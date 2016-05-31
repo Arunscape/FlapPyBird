@@ -7,6 +7,7 @@ import flappy, hiscores
 class loginApp:
     def __init__(self, master):
         #makes the gui
+        self.master = master
 
         topframe = Frame(master)
         topframe.pack()
@@ -45,7 +46,9 @@ class loginApp:
         if not self.are_fields_empty():
             if self.validate_credentials():
                 print('success! logging in...')
+                self.master.destroy()
                 flappy.main()
+
             elif not self.validate_credentials():
                 self.username_exists()
 
@@ -61,7 +64,9 @@ class loginApp:
             if self.verify_new_password():
                 print('meking new account...')
                 self.write_data()
+                self.root.quit()
                 flappy.main()
+
             elif not self.verify_new_password():
                 self.try_again()
 

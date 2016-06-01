@@ -2,11 +2,13 @@
 from tkinter import *
 import csv
 import flappy
+
+
 class hiscore:
   def __init__(self, master):
     self.master = master
     #makes the gui
-    
+
 
     topframe = Frame(master)
     topframe.pack()
@@ -54,15 +56,22 @@ class hiscore:
         #distance = longestnamelength - len(line[0]) + 2
         self.listbox.insert(END, line[0], line[2], '-'*20, '')
 
-    def get_score(score):
+    def get_score(person, score):
+      for line in self.data:
+        if flappy.theperson == line[0]:
+          if flappy.totalscore > line[2]:
+            high = line[2]
+
       newframe = Frame(master)
       newframe.pack()
       self.score = score
-      self.scorelabel = Label(newframe, text='Your score is %s' % self.score)
+      self.person = person
+
+      self.scorelabel = Label(newframe, text='Hello, %s! \n Your score that round was: %s \n Your all-time high is: %s' %(self.person, self.score, high))
       self.scorelabel.grid()
 
 
-    get_score(827498398437987475)
+    get_score(flappy.theperson,flappy.totalscore)
 
     self.rd1 = Radiobutton(topframe, text='Name', variable = v, value = 1, command=sort_name)
     self.rd2 = Radiobutton(topframe, text='Score', variable = v, value =2, command=sort_score)
@@ -88,7 +97,9 @@ class hiscore:
     self.master.destroy()
     flappy.main()
   def exit(self):
-    root.destroy()
+    self.master.destroy()
+
+
 
 def main():
   root = Tk()

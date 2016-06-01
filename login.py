@@ -2,7 +2,7 @@
 from tkinter import *
 from tkinter import messagebox
 import csv
-import flappy, hiscores
+import flappy #, hiscores
 
 class loginApp:
     def __init__(self, master):
@@ -64,7 +64,7 @@ class loginApp:
             if self.verify_new_password():
                 print('meking new account...')
                 self.write_data()
-                self.root.quit()
+                self.master.destroy()
                 flappy.main()
 
             elif not self.verify_new_password():
@@ -87,8 +87,10 @@ class loginApp:
         else: return False
 
     def validate_credentials(self):
+        global theperson
         for line in self.data:
             if self.userentry.get() == line[0] and self.passentry.get() == line[1]:
+                flappy.theperson = self.userentry.get()
                 return True
             #else: return False
 
@@ -98,7 +100,7 @@ class loginApp:
             messagebox.showerror('WRONG PASSWORD ENTERED', 'YOU HAVE %s TRIES REMAINING' % self.ntries)
         else:
             messagebox.showerror('INTRUDER ALERT', 'UNAUTHORIZED USER DETECTED, PROGRAM EXITING...')
-            root.destroy()
+            self.master.destroy()
 
     def username_available(self):
         if any(self.userentry.get() == line[0] for line in self.data):

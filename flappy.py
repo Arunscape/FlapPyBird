@@ -7,6 +7,10 @@ import pygame
 from pygame.locals import *
 import hiscores
 
+totalscore = 0
+theperson = ''
+thepass = ''
+
 FPS = 30
 SCREENWIDTH  = 288
 SCREENHEIGHT = 512
@@ -377,6 +381,7 @@ def getRandomPipe():
 
 
 def showScore(score):
+    global totalscore
     """displays score in center of screen"""
     scoreDigits = [int(x) for x in list(str(score))]
     totalWidth = 0 # total width of all numbers to be printed
@@ -390,6 +395,8 @@ def showScore(score):
         SCREEN.blit(IMAGES['numbers'][digit], (Xoffset, SCREENHEIGHT * 0.1))
         Xoffset += IMAGES['numbers'][digit].get_width()
 
+    totalscore = score
+    print(totalscore)
 
 def checkCrash(player, upperPipes, lowerPipes):
     """returns True if player collders with base or pipes."""

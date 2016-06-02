@@ -64,6 +64,7 @@ class loginApp:
             if self.verify_new_password():
                 print('meking new account...')
                 self.write_data()
+                flappy.theperson = self.userentry.get()
                 self.master.destroy()
                 flappy.main()
 
@@ -87,7 +88,6 @@ class loginApp:
         else: return False
 
     def validate_credentials(self):
-        global theperson
         for line in self.data:
             if self.userentry.get() == line[0] and self.passentry.get() == line[1]:
                 flappy.theperson = self.userentry.get()

@@ -57,10 +57,16 @@ class hiscore:
         self.listbox.insert(END, line[0], line[2], '-'*20, '')
 
     def get_score(person, score):
+      high = '0'
       for line in self.data:
         if flappy.theperson == line[0]:
-          if flappy.totalscore > line[2]:
-            high = line[2]
+          if flappy.totalscore > int(line[2]):
+            high = flappy.totalscore
+            line[2] = high
+            with open('scores.csv', 'w', newline='') as csvfile:
+              csv.writer(csvfile).writerows(self.data)
+          else: high = int(line[2])
+
 
       newframe = Frame(master)
       newframe.pack()
